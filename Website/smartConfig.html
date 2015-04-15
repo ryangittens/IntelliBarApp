@@ -1,0 +1,88 @@
+<!-- * smartConfig.html
+ *
+ * smartConfig html file
+ *
+ * Copyright (C) {YEAR} Texas Instruments Incorporated - http://www.ti.com/ 
+ * ALL RIGHTS RESERVED 
+ *-->
+ 
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' lang='he'>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+		<LINK REL='icon' HREF='' TYPE='image/png' />
+		<meta name='description' content='?????? ??? ????? ?? ???? ??? ??????, ???? ?????? ????????? ?????? ?? ????? ??? ????? ?? ???? ????? ?? ???? ?????.' />		
+		<META NAME='author' CONTENT='Adir Eini' />	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>CC300 Smart Config</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<link rel='stylesheet' type='text/css' href='css/jquery-ui.css' />
+		<link rel='stylesheet' type='text/css' href='css/smartConfig.css' />
+		<script type='text/javascript' src='js/jquery-1.9.1.min.js'></script>		
+		<script type='text/javascript' src='js/jquery-ui.min.js'></script>
+		<script type='text/javascript' src='js/userInterface.js'></script>
+		<script type='text/javascript' src='js/smartConfig.js'></script>		
+		
+	</head>
+	<body>
+
+<div class='black_overlay'>
+	<center>
+		<h1>Smart Config</h1>
+		<div class='main_panel'>
+			<br/>
+			<table >
+				<tr>
+					<td>
+						SSID
+					</td>
+					<td>
+						<input type='text' id='SSID' title="Please input your access point's SSID"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Password
+					</td>
+					<td>
+						<input type='password' id='password' title="For secure networks, please input the password"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Gateway IP Address
+					</td>
+					<td>
+						<input type='text' id='gatewayIpAddress' title="The IP address of your access point"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Key
+					</td>
+					<td>
+						<input type='key' id='key' title="Enter an extra password for extra encryption"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Device Name
+					</td>
+					<td>
+						<input type='text' id='ackString' value='CC3000' title="The name of your device"></input>
+					</td>
+				</tr>
+				
+			</table>
+			<hr/>
+			<button id='workingButton'>Start</button>
+			<br/><br/>
+			Version 1.1
+			<br/><br/>
+		</div>
+		
+	</center>
+</div>
+</body>
+</html>

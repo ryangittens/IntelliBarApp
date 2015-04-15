@@ -1,0 +1,285 @@
+<div ng-init="loadSpark(selectedBar)" ng-controller="SparkCtrl"> <md-progress-circular id="login-load" ng-if="dataLoading" md-mode="indeterminate" md-diameter="30"></md-progress-circular> <md-content ng-if="!bars[selectedBar].connected && !dataLoading"> <h2>There was an error, please check if the device is online</h2> </md-content> <div ng-if="bars[selectedBar].connected && !dataLoading"> <main> <ul class="no-decoration outlet-nav"> <li ng-class="{active:isActiveTab(tabs[0].url)}" ng-click="onClickTab(tabs[0])"> <input class="input" id="tab1" type="radio" name="tabs" checked> <label for="tab1"><md-icon md-font-icon="{{'icon-' + device[0]}}"> </md-icon> {{device[0]}}</label> </li> <li ng-class="{active:isActiveTab(tabs[1].url)}" ng-click="onClickTab(tabs[1])"> <input class="input" id="tab2" type="radio" name="tabs"> <label for="tab2"><md-icon md-font-icon="{{'icon-' + device[1]}}"> </md-icon> {{device[1]}}</label> </li> <li ng-class="{active:isActiveTab(tabs[2].url)}" ng-click="onClickTab(tabs[2])"> <input class="input" id="tab3" type="radio" name="tabs"> <label for="tab3"><md-icon md-font-icon="{{'icon-' + device[2]}}"> </md-icon> {{device[2]}}</label> </li> <li ng-class="{active:isActiveTab(tabs[3].url)}" ng-click="onClickTab(tabs[3])"> <input class="input" id="tab4" type="radio" name="tabs"> <label for="tab4"><md-icon md-font-icon="{{'icon-' + device[3]}}"> </md-icon> {{device[3]}}</label> </li> </ul> <div id="mainView"> <div ng-include="currentTab"></div> </div> <script type="text/ng-template" id="one.tpl.html"><section id="content1">
+    <md-content>
+        <nvd3-stacked-area-chart
+            data="data1"
+            chartId="exampleId1"
+            height="300"
+            showXAxis="true"
+            showYAxis="true"
+            tooltips="true"
+            interactive="true"
+            useInteractiveGuideline="true"
+            toolTipContent="toolTipContentFunction()"
+            xAxisTickFormat="xAxisTickFormat()">
+          <svg></svg>
+    </nvd3-stacked-area-chart>
+    <md-divider></md-divider>
+    <div class="outlet-content">
+    <div layout="row" layout-wrap>
+      <div flex>
+        <md-switch class="md-primary" ng-model="bars[selectedBar].relayStatus[0]" aria-label="Switch 1" ng-change="outletSwitch(1, bars[selectedBar].relayStatus[0], bars[selectedBar].id)">
+        </md-switch>
+        <h2 class="md-primary-color">Energy Consumption:</h2>
+      </div>
+      <div flex>
+          <md-select  class="change-device" ng-model="device[0]" placeholder="Change Device">
+            <md-option ng-value="opt" ng-repeat="opt in devices">{{ opt }}</md-option>
+          </md-select>
+           <md-button class = "md-primary" ng-click = "updateDeviceAlias()">Save</md-button>
+      </div>
+    </div>
+      <div layout="row" layout-wrap>  
+        <div flex="70">
+          <div layout = "row">
+            <div flex = "70"><h4>Currently <br> Consuming:</h4> </div>
+            <!--
+            <div flex = "25">
+              <md-input-container class="price-container">
+              <label>&centUSD/kW</label>
+              <input required type="number" step="any" name="rate" ng-model="rate">
+              </md-input-container>
+            </div>
+            -->
+          </div>
+            <div layout = "row">
+              <h1>{{bars[selectedBar].inst.data1 | setDecimal:2}}</h1><h2 class = "unit-main">W</h2>
+              <md-button ng-click = "loadInst()" class = "md-accent">Read Now</md-button>
+            </div>
+        </div>
+        <div flex>
+          <md-icon md-font-icon="{{'icon-' + device[0]}} outlet-icon md-accent-color"> </md-icon>
+        </div>
+      </div>        
+          <md-divider></md-divider>
+          <div layout="row" layout-wrap>
+            <div flex = "50">
+              <h4>Last hour:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data1,hr,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+            <div class="vertical-divider"></div>
+            <div flex>
+              <h4>30 day average:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data1,month,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+          </div>
+          <md-divider></md-divider>
+        </div>
+  </md-content>
+  </section></script> <script type="text/ng-template" id="two.tpl.html"><section id="content2">
+    <md-content>
+            <nvd3-stacked-area-chart
+            data="data2"
+            chartId="exampleId2"
+            height="300"
+            showXAxis="true"
+            showYAxis="true"
+            tooltips="true"
+            interactive="true"
+            useInteractiveGuideline="true"
+            toolTipContent="toolTipContentFunction()"
+            xAxisTickFormat="xAxisTickFormat()">
+          <svg></svg>
+    </nvd3-stacked-area-chart>
+    <md-divider></md-divider>
+    <div class="outlet-content">
+    <div layout="row" layout-wrap>
+      <div flex>
+        <md-switch class="md-primary" ng-model="bars[selectedBar].relayStatus[1]" aria-label="Switch 2" ng-change="outletSwitch(2, bars[selectedBar].relayStatus[1], bars[selectedBar].id)">
+        </md-switch>
+        <h2 class="md-primary-color">Energy Consumption:</h2>
+      </div>
+      <div flex>
+          <md-select  class="change-device" ng-model="device[1]" placeholder="Change Device">
+            <md-option ng-value="opt" ng-repeat="opt in devices">{{ opt }}</md-option>
+          </md-select>
+          <md-button class = "md-primary" ng-click = "updateDeviceAlias()">Save</md-button>
+      </div>
+    </div>
+      <div layout="row" layout-wrap>  
+        <div flex="70">
+          <div layout = "row">
+            <div flex = "70"><h4>Currently <br> Consuming:</h4> </div>
+            <!--
+            <div flex = "25">
+              <md-input-container class="price-container">
+              <label>&centUSD/kW</label>
+              <input required type="number" step="any" name="rate" ng-model="rate">
+              </md-input-container>
+            </div>
+            -->
+          </div>
+            <div layout = "row">
+              <h1>{{bars[selectedBar].inst.data2 | setDecimal:2}}<h2 class = "unit-main">W</h2>
+              <md-button ng-click = "loadInst()" class = "md-accent">Read Now</md-button>
+            </div>
+        </div>
+        <div flex>
+          <md-icon md-font-icon="{{'icon-' + device[1]}} outlet-icon md-accent-color"> </md-icon>
+        </div>
+      </div>        
+          <md-divider></md-divider>
+          <div layout="row" layout-wrap>
+            <div flex = "50">
+              <h4>Last hour:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data2,hr,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+            <div class="vertical-divider"></div>
+            <div flex>
+              <h4>30 day average:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data2,month,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+          </div>
+          <md-divider></md-divider>
+      </div>
+      </md-content>
+  </section></script> <script type="text/ng-template" id="three.tpl.html"><section id="content3">
+    <md-content>
+            <nvd3-stacked-area-chart
+            data="data3"
+            id="exampleId3"
+            height="300"
+            showXAxis="true"
+            showYAxis="true"
+            tooltips="true"
+            interactive="true"
+            useInteractiveGuideline="true"
+            toolTipContent="toolTipContentFunction()"
+            xAxisTickFormat="xAxisTickFormat()">
+          <svg></svg>
+    </nvd3-stacked-area-chart>
+    <md-divider></md-divider>
+    <div class="outlet-content">
+    <div layout="row" layout-wrap>
+      <div flex>
+        <md-switch class="md-primary" ng-model="bars[selectedBar].relayStatus[2]" aria-label="Switch 3" ng-change="outletSwitch(3, bars[selectedBar].relayStatus[2], bars[selectedBar].id)">
+        </md-switch>
+        <h2 class="md-primary-color">Energy Consumption:</h2>
+      </div>
+      <div flex>
+          <md-select  class="change-device" ng-model="device[2]" placeholder="Change Device">
+            <md-option ng-value="opt" ng-repeat="opt in devices">{{ opt }}</md-option>
+          </md-select>
+          <md-button class = "md-primary" ng-click = "updateDeviceAlias()">Save</md-button>
+      </div>
+    </div>
+      <div layout="row" layout-wrap>  
+        <div flex="70">
+          <div layout = "row">
+            <div flex = "70"><h4>Currently <br> Consuming:</h4> </div>
+            <!--
+            <div flex = "25">
+              <md-input-container class="price-container">
+              <label>&centUSD/kW</label>
+              <input required type="number" step="any" name="rate" ng-model="rate">
+              </md-input-container>
+            </div>
+            -->
+          </div>
+            <div layout = "row">
+              <h1>{{bars[selectedBar].inst.data3 | setDecimal:2}}</h1><h2 class = "unit-main">W</h2>
+              <md-button ng-click = "loadInst()" class = "md-accent">Read Now</md-button>
+            </div>
+        </div>
+        <div flex>
+          <md-icon md-font-icon="{{'icon-' + device[2]}} outlet-icon md-accent-color"> </md-icon>
+        </div>
+      </div>        
+          <md-divider></md-divider>
+          <div layout="row" layout-wrap>
+            <div flex = "50">
+              <h4>Last hour:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data3,hr,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+            <div class="vertical-divider"></div>
+            <div flex>
+              <h4>30 day average:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data3,month,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+          </div>
+          <md-divider></md-divider>
+      </div>
+      </md-content>
+  </section></script> <script type="text/ng-template" id="four.tpl.html"><section id="content4">
+    <md-content>
+            <nvd3-stacked-area-chart
+            data="data4"
+            id="exampleId4"
+            height="300"
+            showXAxis="true"
+            showYAxis="true"
+            tooltips="true"
+            interactive="true"
+            useInteractiveGuideline="true"
+            toolTipContent="toolTipContentFunction()"
+            xAxisTickFormat="xAxisTickFormat()">
+          <svg></svg>
+    </nvd3-stacked-area-chart>
+    <md-divider></md-divider>
+    <div class="outlet-content">
+    <div layout="row" layout-wrap>
+      <div flex>
+        <md-switch class="md-primary" ng-model="bars[selectedBar].relayStatus[3]" aria-label="Switch 4" ng-change="outletSwitch(4, bars[selectedBar].relayStatus[3], bars[selectedBar].id)">
+        </md-switch>
+        <h2 class="md-primary-color">Energy Consumption:</h2>
+      </div>
+      <div flex>
+          <md-select  class="change-device" ng-model="device[3]" placeholder="Change Device">
+            <md-option ng-value="opt" ng-repeat="opt in devices">{{ opt }}</md-option>
+          </md-select>
+          <md-button class = "md-primary" ng-click = "updateDeviceAlias()">Save</md-button>
+      </div>
+    </div>
+      <div layout="row" layout-wrap>  
+        <div flex="70">
+          <div layout = "row">
+            <div flex = "70"><h4>Currently <br> Consuming:</h4> </div>
+            <!--
+            <div flex = "25">
+              <md-input-container class="price-container">
+              <label>&centUSD/kW</label>
+              <input required type="number" step="any" name="rate" ng-model="rate">
+              </md-input-container>
+            </div>
+            -->
+          </div>
+            <div layout = "row">
+              <h1>{{bars[selectedBar].inst.data4 | setDecimal:2}}</h1><h2 class = "unit-main">W</h2>
+              <md-button ng-click = "loadInst()" class = "md-accent">Read Now</md-button>
+            </div>
+        </div>
+        <div flex>
+          <md-icon md-font-icon="{{'icon-' + device[3]}} outlet-icon md-accent-color"> </md-icon>
+        </div>
+      </div>        
+          <md-divider></md-divider>
+          <div layout="row" layout-wrap>
+            <div flex = "50">
+              <h4>Last hour:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data4,hr,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+            <div class="vertical-divider"></div>
+            <div flex>
+              <h4>30 day average:</h4>
+              <div layout = "row">
+                <h2>{{sumData(data4,month,0.001) | setDecimal:2}}</h2><div flex = "5"></div><h2 class = "unit">kWh</h2>
+              </div>
+            </div>
+          </div>
+          <md-divider></md-divider>
+      </div>
+      </md-content>
+  </section></script> </main> </div> </div>

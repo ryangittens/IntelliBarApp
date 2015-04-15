@@ -1,0 +1,73 @@
+<div class="login-wrap">
+
+
+  <div id = "login-logo-container" class="text-center">
+  <img class="login-logo" src="images/login-logo.png">
+</div>
+<div class="col-sm-4 col-sm-offset-4 text-center login-form" > 
+  <div id="loginbox">
+  <div ng-show="error" class="alert alert-danger login-alert">{{error}}</div>
+  <form name="form" ng-submit="login()" role="form">
+      <div class="form-group">
+          <i class="fa fa-key"></i>
+          <input placeholder = "Username" type="text" name="username" id="username" class="form-control" ng-model="username" required />
+          <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+      </div>
+      <div class="form-group">
+          <i class="fa fa-lock"></i>
+          <input placeholder = "Password" type="password" name="password" id="password" class="form-control" ng-model="password" required />
+          <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+      </div>
+      <div class="form-actions text-center">
+            <md-button class="md-raised md-primary btn" type="submit" ng-disabled="form.$invalid || dataLoading">Sign In</md-button>
+            <md-button md-no-ink class="md-primary pull-left" onClick="$('#loginbox').hide(); $('#signupbox').show()" type = "button">Register</md-button>
+          <md-progress-circular id="login-load" ng-if="dataLoading"  md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+      </div>
+  </form>
+  </div>
+
+  <div id="signupbox" style="display:none;">
+  <div ng-show="error" class="alert alert-danger login-alert">{{error}}</div>
+  <form name="form" ng-submit="createUser()" role="form">
+      <div class="form-group">
+          <i class="fa fa-key"></i>
+          <input placeholder = "Email" type="text" name="username" id="username" class="form-control" ng-model="username" required />
+          <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Email is required</span>
+      </div>
+      <div class="form-group">
+          <i class="fa fa-lock"></i>
+          <input placeholder = "Password" type="password" name="password" id="password" class="form-control" ng-model="password" required />
+          <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+      </div>
+      <div class="form-actions text-center">
+            <md-button class="md-raised md-primary btn"  type="submit" ng-disabled="form.$invalid || dataLoading">Register</md-button>
+            <md-button md-no-ink class="md-primary pull-left" onclick="$('#signupbox').hide(); $('#loginbox').show()" type = "button">Sign In</md-button>
+            
+          <md-progress-circular id="login-load" ng-if="dataLoading"  md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+      </div>
+  </form>
+  </div>
+
+</div>
+
+<!--
+<div ng-controller="LoginCtrl" class="ng-scope">
+<form name="form" ng-submit="login()" role="form">
+  <md-content md-theme="docs-dark" class="md-padding md-docs-dark-theme" layout="row" layout-sm="column">
+    <md-input-container class="md-docs-dark-theme md-input-has-value">
+      <label for="input_005">Username</label>
+      <input type="text" name="username" id="username" class="form-control" ng-model="username" required>
+      <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+    </md-input-container>
+    <md-input-container class="md-docs-dark-theme md-input-has-value">
+      <label for="input_006">Password</label>
+      <input type="password" name="password" id="password" class="form-control" ng-model="password" required>
+       <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+    </md-input-container>
+  </md-content>
+<button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger">Login</button>
+</form>
+</div>
+-->
+
+</div>

@@ -1,0 +1,78 @@
+.md-sidenav-left, .md-sidenav-backdrop{
+  margin-top: 64px;
+  z-index: 200;
+}
+
+.sidebar-header{
+	background: url(../images/logo_sidebar.jpg);
+	background-size: contain;
+	height: 171px;
+	position: relative;
+  
+}
+
+.sidebar-brand{
+	position: absolute;
+	bottom: 0;
+	height: 40px;
+	width: 100%;
+}
+
+.sidenav{
+	height: 100%;
+}
+
+.fixed-bottom{
+	position: fixed;
+	bottom: 0;
+}
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+body {
+		overflow:hidden;
+	}
+}
+
+#toolbar-more{
+  right: 0;
+  left: initial;
+  top: 113%;
+  min-width: 120px;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+#edgeSwipeOverlay {
+position: fixed;
+bottom: -64px;
+left: 0;
+width: 20px;
+height: 100%;
+z-index: 100;
+  -webkit-backface-visibility: hidden;
+}
+
+
+body{
+  padding-top: 64px;
+}
+ 
+.toolbar-top{
+  position: fixed;
+  top: 0;
+  -webkit-backface-visibility: hidden;
+}
+
+.wrap{
+  padding: 20px;
+}
+
+#toolbar-logo{
+  height: 40px;
+}
+
+

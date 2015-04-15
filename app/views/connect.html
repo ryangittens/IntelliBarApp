@@ -1,0 +1,88 @@
+<!--<div ng-controller = "SmartConfigCtrl">
+	<center>
+		<h1>Smart Config</h1>
+		<div>
+			<br/>
+			<table >
+				<tr>
+					<td>
+						SSID
+					</td>
+					<td>
+						<input type='text' id='SSID' title="Please input your access point's SSID"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Password
+					</td>
+					<td>
+						<input type='password' id='password' title="For secure networks, please input the password"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Gateway IP Address
+					</td>
+					<td>
+						<input type='text' id='gatewayIpAddress' title="The IP address of your access point"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Key
+					</td>
+					<td>
+						<input type='key' id='key' title="Enter an extra password for extra encryption"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Device Name
+					</td>
+					<td>
+						<input type='text' id='ackString' value='CC3000' title="The name of your device"></input>
+					</td>
+				</tr>
+				
+			</table>
+			<hr/>
+			<button id='workingButton'>Start</button>
+			<br/><br/>
+			Version 1.1
+			<br/><br/>
+		</div>
+		
+	</center>
+</div>
+-->
+
+<!--
+<div class="text-center">
+
+<h2 id="connecting-your-core-smart-config-with-the-spark-app">Smart Config with the Spark app</h2>
+
+<iframe src="https://vine.co/v/hFH09MJwbxg/embed/simple" width="320" height="320" frameborder="0"></iframe>
+<md-content>
+<p>To connect the core for the first time, you will need the Spark App.</p>
+<p>Once you've downloaded the Spark Core app from the App Store or Google Play, you'll be asked to connect your Core using a process called Smart Config. <em>NOTE: Your phone must be connected to the Wi-Fi network that you want to connect the Core to.  Wi-Fi Hotspots generated from the phone you are running this app on typically will yield an error claiming there is no Wi-Fi available.</em>  When connected to Wi-Fi, the app will automatically fill the SSID field with the name of the network that your phone is connected to.  Enter your Wi-Fi password and hit connect.</p>
+</md-content>
+</div>
+-->
+
+<md-dialog aria-label="Bar Connect" id = "modal">
+  <md-content>
+    <md-subheader class="md-sticky-no-effect">Smart Config with the Spark app</md-subheader>
+    <div class="text-center">
+    	<iframe src="https://vine.co/v/hFH09MJwbxg/embed/simple" width="320" height="320" frameborder="0"></iframe>
+    	<p>To connect the core for the first time, you will need the Spark App.</p>
+		<p>Once you've downloaded the Spark Core app from the App Store or Google Play, you'll be asked to connect your Core using a process called Smart Config. <em>NOTE: Your phone must be connected to the Wi-Fi network that you want to connect the Core to.  Wi-Fi Hotspots generated from the phone you are running this app on typically will yield an error claiming there is no Wi-Fi available.</em>  When connected to Wi-Fi, the app will automatically fill the SSID field with the name of the network that your phone is connected to.  Enter your Wi-Fi password and hit connect.</p>
+	</div>
+  </md-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="hide()">
+     OK
+    </md-button>
+  </div>
+</md-dialog>

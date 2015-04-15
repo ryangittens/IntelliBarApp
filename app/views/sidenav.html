@@ -1,0 +1,60 @@
+<div class="control"  ng-controller="NavController" ng-hide="isActive('/login')">
+<div id="edgeSwipeOverlay" md-swipe-right="openLeftMenu()"></div>
+  <div layout="row" layout-fill>
+    <md-toolbar class = "toolbar-top">
+      <div class="md-toolbar-tools">
+      <md-button ng-click="toggleLeftMenu()" aria-label="toggle menu"><md-icon md-font-icon="icon-menu icon-button"> </md-icon> </md-button>
+        <!-- fill up the space between left and right area -->
+        <span flex class="text-center">  <img id = "toolbar-logo" src="../images/toolbar-logo.png"> </span>
+        
+
+
+            <!-- Single button -->
+      <div class="btn-group dropdown">
+        <md-button type="button" data-toggle="dropdown" aria-label="log">
+        <md-icon md-font-icon="icon-button icon-more-vert"> </md-icon>
+        </md-button>
+        <div class="dropdown-menu" id = "toolbar-more" role="menu">
+        <a class="list-group-item" ng-href="#/login">Log out</a>
+        <a class="list-group-item" href="#">Help</a>
+      </div>
+      </div>
+
+      </div>
+    </md-toolbar>
+  </div>
+  <div layout="row" class = "sidenav">
+    <md-sidenav md-component-id="left" class="md-sidenav-left"  is-closed="{{bodyScroll()}}" md-swipe-left="closeLeftMenu()">
+      <div class="sidebar-header">
+        <div class="sidebar-image"></div>
+        <div class="sidebar-brand" layout="row">
+          <span style="margin: auto 0 auto 8px">{{globals.currentUser.username}}</span>
+          <span flex></span>
+          <md-button class ="icon-button" ng-click="toggle()" aria-label="more"> <md-icon md-font-icon="{{icon()}}"> </md-icon></md-button>
+        </div>
+      </div>
+
+      <div class = "pages">
+        <div ng-show = "selected" layout="column">
+          <md-button class= "icon-dashboard menu-button" ng-href="#/dash">
+           <span>Dashboard</span>
+          </md-button>
+          <md-button class= "icon-polymer menu-button" ng-href="#/outlets">
+          <span>Outlets</span>
+          </md-button>
+        </div>
+        <div ng-hide = "selected" ng-controller = "SparkCtrl" layout="column">
+          <md-progress-circular id="login-load" ng-if="dataLoading"  md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+          <md-button class= "menu-button" ng-repeat = "bar in bars" ng-click = "setBar($index)" aria-label="bar name">
+            <md-icon md-font-icon="{{statusIcon(bar.connected)}}"> </md-icon>
+            <span class = "bar-name">{{bar.name}}</span>
+          </md-button>
+          <md-button class= "icon-add menu-button fixed-bottom" ng-click = "showModal($event)" aria-label="add">
+            <span>Add Bar</span>
+          </md-button>
+        </div>
+      </div>
+    </md-sidenav>
+
+  </div>
+</div>

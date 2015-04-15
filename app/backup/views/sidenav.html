@@ -1,0 +1,61 @@
+<div class="control"  ng-controller="NavController">
+<div id="edgeSwipeOverlay" md-swipe-right="openLeftMenu()"></div>
+  <div layout="row" layout-fill>
+    <md-toolbar class = "toolbar-top">
+      <div class="md-toolbar-tools">
+        <paper-icon-button id="navicon" 
+          icon="menu" ng-click="openLeftMenu()"></paper-icon-button>
+        <!-- fill up the space between left and right area -->
+        <span flex class="text-center">  <img id = "toolbar-logo" src="../images/logo.svg"> </span>
+        
+
+
+            <!-- Single button -->
+<div class="btn-group">
+  <paper-icon-button icon="more-vert" type="button" data-toggle="dropdown" aria-expanded="false">
+  </paper-icon-button>
+  <ul class="dropdown-menu" id = "toolbar-more" role="menu">
+    <li><a href="#">Log out</a></li>
+    <li><a href="#">Help</a></li>
+  </ul>
+</div>
+
+      </div>
+    </md-toolbar>
+  </div>
+  <div layout="row" class = "sidenav">
+    <md-sidenav md-component-id="left" class="md-sidenav-left"  is-closed="{{bodyScroll()}}" md-swipe-left="openLeftMenu()">
+    <div class="sidebar-header">
+      <div class="sidebar-image"><img src=""></div>
+      <div class="sidebar-brand" layout="row">
+        <span style="margin: auto 0 auto 8px"> Fname Lname</span>
+        <span flex></span>
+        <paper-icon-button id="navicon" 
+          icon= "{{icon()}}" ng-click="toggle()"></paper-icon-button>
+      </div>
+    </div>
+
+    <core-pages selected="0">
+      <div>
+         <core-menu>
+          <core-item  label="Dashboard" icon = "dashboard"><a ng-href="#/dash"></a> </core-item>
+          <core-item label="Outlets" icon = "polymer"><a ng-href="#/outlets"></a> </core-item>
+        </core-menu>
+      </div>
+      <div>
+      <core-menu>
+        <core-item ng-repeat = "bar in bars">
+         {{bar.name}} Status: {{bar.status}}
+        </core-item>
+      </core-menu>
+        <core-menu class="fixed-bottom">
+         <core-item  label="Add Bar" icon = "add"><a href"#"></a> 
+         </core-item>
+        </core-menu>
+      </div>
+
+    </core-pages>
+    </md-sidenav>
+
+  </div>
+</div>
